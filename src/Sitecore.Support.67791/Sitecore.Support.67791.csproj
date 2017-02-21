@@ -45,16 +45,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Forms.Core, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WFFM.Sitecore.Forms.Core.8.1.2\lib\Sitecore.Forms.Core.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\WFFM.Sitecore.Forms.Core.8.1.1\lib\Sitecore.Forms.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Kernel">
-      <HintPath>..\packages\SC.Sitecore.Kernel.8.1.2\lib\Sitecore.Kernel.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Sitecore.Kernel, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SC.Sitecore.Kernel.8.1.1\lib\Sitecore.Kernel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.WFFM.Abstractions, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WFFM.Sitecore.WFFM.Abstractions.8.1.2\lib\Sitecore.WFFM.Abstractions.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\WFFM.Sitecore.WFFM.Abstractions.8.1.1\lib\Sitecore.WFFM.Abstractions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -64,7 +64,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\SC.System.Web.Mvc.8.1.1\lib\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -98,6 +98,7 @@
     <Content Include="Views\Form\EditorTemplates\FileUploadField.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\sc81rev151207cd.pubxml" />
     <None Include="web.config" />
   </ItemGroup>
   <ItemGroup />

@@ -11,7 +11,7 @@ using Sitecore.Form.Core.Configuration;
 using Sitecore.Form.Core.Utility;
 using Sitecore.Forms.Core.Data;
 using Sitecore.WFFM.Abstractions.Actions;
-using Sitecore.WFFM.Abstractions.Dependencies;
+using Sitecore.WFFM.Abstractions;
 using Sitecore.WFFM.Abstractions.Mail;
 using Sitecore.WFFM.Abstractions.Shared;
 using Sitecore.WFFM.Abstractions.Utils;
