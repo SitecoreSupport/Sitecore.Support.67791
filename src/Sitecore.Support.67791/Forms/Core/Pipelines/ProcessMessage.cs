@@ -107,6 +107,7 @@ namespace Sitecore.Support.Forms.Core.Pipelines
     {
       string str2;
       var item = new FieldItem(StaticSettings.ContextDatabase.GetItem(field.FieldID));
+
       var text = item["Parameters"];
       var index = text.IndexOf("<UploadTo>", StringComparison.InvariantCultureIgnoreCase);
       var length = text.IndexOf("</UploadTo>", StringComparison.InvariantCultureIgnoreCase) - index;
