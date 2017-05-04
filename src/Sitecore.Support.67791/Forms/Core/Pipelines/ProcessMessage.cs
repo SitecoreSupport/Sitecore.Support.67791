@@ -50,50 +50,55 @@ namespace Sitecore.Support.Forms.Core.Pipelines
         var uri = ItemUri.Parse(result.Value);
 
         if (uri != null)
-        {
+        {          
           var innerItem = ItemRepository.GetItem(uri);
-          if (innerItem == null) continue;
+          if (innerItem == null)
+          {            
+            continue;
+          }
 
-          var item2 = new MediaItem(innerItem);
+          var item2 = new MediaItem(innerItem);         
           args.Attachments.Add(new Attachment(item2.GetMediaStream(), string.Join(".", item2.Name, item2.Extension), item2.MimeType));
         }
         else
         {
           var fileFromRequest = GetFileFromRequest(result.FieldID);
-
           if (fileFromRequest != null)
-          {
-            args.Attachments.Add(new Attachment(fileFromRequest.InputStream, fileFromRequest.FileName,
-              fileFromRequest.ContentType));
-          }
-
-          SetCorrectValueForTheField(result, fileFromRequest);
+          {            
+            args.Attachments.Add(new Attachment(fileFromRequest.InputStream, fileFromRequest.FileName, fileFromRequest.ContentType));
+            SetCorrectValueForTheField(result, fileFromRequest);
+          }             
         }
       }
     }
 
     private HttpPostedFile GetFileFromRequest(string fieldId)
     {
-      if ((HttpContext.Current == null) || (HttpContext.Current.Request.Files.Count == 0)) return null;
+      if ((HttpContext.Current == null) || (HttpContext.Current.Request.Files.Count == 0))
+      {        
+        return null;
+      }
 
       var files = HttpContext.Current.Request.Files;
       var allKeys = files.AllKeys;
 
-      if (HttpContext.Current.Handler.GetType() == typeof(MvcHandler))
-      {
+      if (HttpContext.Current.Handler.GetType() == typeof(MvcHandler) || HttpContext.Current.Handler.GetType() == typeof(Sitecore.Mvc.Routing.RouteHttpHandler))
+      {        
         var keys = HttpContext.Current.Request.Form.AllKeys;
         for (var i = 0; i < allKeys.Length; i++)
         {
-          if (!keys.Any(key => key.Contains(fieldId) && allKeys[i].Contains(key.Replace(fieldId, "")))) continue;
+          if (!keys.Any(key => key.Contains(fieldId) && allKeys[i].Contains(key.Replace(fieldId, ""))))
+          {        
+            continue;
+          }
 
-          var file = files[i];
-          file.InputStream.Position = 0L;
-
+          var file = files[i];          
+          file.InputStream.Position = 0L;                    
           return file;
         }
       }
       else
-      {
+      {        
         var str = fieldId.Replace("-", string.Empty).TrimStart('{').TrimEnd('}');
         for (var k = 0; k < allKeys.Length; k++)
         {
@@ -105,22 +110,21 @@ namespace Sitecore.Support.Forms.Core.Pipelines
 
     private void SetCorrectValueForTheField(AdaptedControlResult field, HttpPostedFile postedFile)
     {
-      string str2;
+      string str2 = "/sitecore/media library/"; ;      
       var item = new FieldItem(StaticSettings.ContextDatabase.GetItem(field.FieldID));
-
       var text = item["Parameters"];
-      var index = text.IndexOf("<UploadTo>", StringComparison.InvariantCultureIgnoreCase);
-      var length = text.IndexOf("</UploadTo>", StringComparison.InvariantCultureIgnoreCase) - index;
+      if (text != null)
+      {        
+        var index = text.IndexOf("<UploadTo>", StringComparison.InvariantCultureIgnoreCase);
+        var length = text.IndexOf("</UploadTo>", StringComparison.InvariantCultureIgnoreCase) - index;
 
-      if ((index < length) && (length > 0))
-      {
-        str2 = text.Mid(index, length);
+        if ((index < length) && (length > 0))
+        {
+          str2 = text.Mid(index, length);
+        }
       }
-      else
-      {
-        str2 = "/sitecore/media library/";
-      }
-      ReflectionUtils.SetProperty(field, "Value", string.Format("{0}{1} (attached)", str2, postedFile.FileName), true);
+           
+      ReflectionUtils.SetProperty(field, "Value", string.Format("{0}/{1} (attached)", str2, postedFile.FileName), true);
     }
   }
 }
