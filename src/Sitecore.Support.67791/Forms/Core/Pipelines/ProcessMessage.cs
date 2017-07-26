@@ -15,6 +15,7 @@ using Sitecore.WFFM.Abstractions;
 using Sitecore.WFFM.Abstractions.Mail;
 using Sitecore.WFFM.Abstractions.Shared;
 using Sitecore.WFFM.Abstractions.Utils;
+using Sitecore.WFFM.Abstractions.Dependencies;
 
 namespace Sitecore.Support.Forms.Core.Pipelines
 {
@@ -110,7 +111,7 @@ namespace Sitecore.Support.Forms.Core.Pipelines
 
     private void SetCorrectValueForTheField(AdaptedControlResult field, HttpPostedFile postedFile)
     {
-      string str2 = "/sitecore/media library/"; ;      
+      string str2 = "/sitecore/media library"; ;      
       var item = new FieldItem(StaticSettings.ContextDatabase.GetItem(field.FieldID));
       var text = item["Parameters"];
       if (text != null)
