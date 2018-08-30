@@ -64,6 +64,7 @@ namespace Sitecore.Support.Forms.Core.Pipelines
         else
         {
           var fileFromRequest = GetFileFromRequest(result.FieldID);
+					fileFromRequest.InputStream.Position = 0;
           if (fileFromRequest != null)
           {            
             args.Attachments.Add(new Attachment(fileFromRequest.InputStream, fileFromRequest.FileName, fileFromRequest.ContentType));
